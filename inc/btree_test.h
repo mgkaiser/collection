@@ -11,6 +11,6 @@
 
   void btree_test();
   void printNode(void __far *node, __far void* param);
-  struct btreeTestData __far *newNode(unsigned int testData);
+  struct btreeTestData __far *newNode(unsigned long testData);
 
 //#endif

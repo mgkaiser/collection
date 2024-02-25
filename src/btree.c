@@ -13,12 +13,12 @@
 #include "btree.h"
 
 // Internal methods
-struct node __far *btree_insert_internal(struct node __far *root, int key, void __far *value);
-struct node __far *btree_delete_internal(struct node __far *root, int key);
+struct node __far *btree_insert_internal(struct node __far *root, long key, void __far *value);
+struct node __far *btree_delete_internal(struct node __far *root, long key);
 struct node __far *btree_find_minimum(struct node __far *root);
-struct node __far *btree_new_node(int key, void __far *value);
+struct node __far *btree_new_node(long key, void __far *value);
 
-struct node __far *btree_search(struct node __far *root, int key)
+struct node __far *btree_search(struct node __far *root, long key)
 {
   if(root==NULL || root->key==key) //if root->key is x then the element is found
     return root;
@@ -39,7 +39,7 @@ struct node __far *btree_find_minimum(struct node __far *root)
 }
 
 //function to create a node
-struct node __far *btree_new_node(int key, void __far *value)
+struct node __far *btree_new_node(long key, void __far *value)
 {
   struct node __far *p = (struct node *)value;  
   p->key = key;  
@@ -48,14 +48,14 @@ struct node __far *btree_new_node(int key, void __far *value)
   return p;
 }
 
-struct node __far *btree_insert(struct node __far **root, int key, void __far *value)
+struct node __far *btree_insert(struct node __far **root, long key, void __far *value)
 {
   struct node __far *node = btree_insert_internal(*root, key, value);  
   if (*root == NULL) *root = node;
   return node;
 }
 
-struct node __far *btree_insert_internal(struct node __far *root, int key, void __far *value)
+struct node __far *btree_insert_internal(struct node __far *root, long key, void __far *value)
 {
   //searching for the place to insert
   if(root==NULL)  return btree_new_node(key, value);
@@ -66,13 +66,13 @@ struct node __far *btree_insert_internal(struct node __far *root, int key, void 
   return root;
 }
 
-void btree_delete(struct node __far **root, int key)
+void btree_delete(struct node __far **root, long key)
 {
   *root = btree_delete_internal(*root, key);
 }
 
 // funnction to delete a node
-struct node __far *btree_delete_internal(struct node __far *root, int key)
+struct node __far *btree_delete_internal(struct node __far *root, long key)
 {
   //searching for the item to be deleted
   if(root == NULL)
@@ -132,3 +132,27 @@ void btree_iterate_backward(struct node __far *root, void (*iterator)(void __far
     btree_iterate_backward(root->left_child, iterator, param);  // visiting left child
   }
 }
+
+/*
+https://stackoverflow.com/questions/2003051/creating-a-hash-of-a-string-thats-sortable
+
+String charset = "abcdefghijklmnopqrstuvwxyz";
+
+public long orderedHash(final String s, final String charset, final long n) {
+  Long hash = 0L;
+
+  if(s.isEmpty() || n == 0)
+    return hash;
+
+  Long charIndex = (long)(charset.indexOf(s.charAt(0)));
+  if(charIndex == -1)
+    return hash;
+
+  for(long i = 1 ; i < n; i++)
+    hash += (long)(charIndex * Math.pow(charset.length(), i));
+
+  hash += charIndex + 1 + orderedHash(s.substring(1), charset, n - 1);
+
+  return hash;
+}
+*/

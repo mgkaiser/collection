@@ -81,10 +81,10 @@ void btree_test()
 
 void printNode(void __far *node, void __far *param)
 {
-  printf(" %s %d \r", (char *)param, ((struct node *)node)->key); 
+  printf(" %s %ld \r", (char *)param, ((struct node *)node)->key); 
 }
 
-struct btreeTestData __far *newNode(unsigned int testData)
+struct btreeTestData __far *newNode(unsigned long testData)
 {
   struct btreeTestData __far *new = pmalloc_malloc(pm, sizeof(struct btreeTestData));
   new->testData = testData;
