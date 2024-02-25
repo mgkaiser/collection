@@ -3,6 +3,4 @@
 
 #include "pmalloc.h"
 
-extern pmalloc_t __far *pm;
-
 #endif

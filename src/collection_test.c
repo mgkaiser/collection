@@ -6,9 +6,6 @@
 #include "queue.h"
 #include "btree.h"
 
-// Pointer to heap header
-pmalloc_t __far *pm;
-
 int main() {
 	printf("Collections: Basic Example\r\r");	
 

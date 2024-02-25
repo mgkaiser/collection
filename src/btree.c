@@ -9,6 +9,7 @@
 // add "reindex"
 // delete and re-add should reindex a single node
 
+#include "pmalloc.h"
 #include "btree.h"
 
 // Internal methods
@@ -85,7 +86,7 @@ struct node __far *btree_delete_internal(struct node __far *root, int key)
     //No Children
     if(root->left_child==NULL && root->right_child==NULL)
     {
-      free(root);
+      pmalloc_free(pm, root);      
       return NULL;
     }
 
@@ -97,7 +98,7 @@ struct node __far *btree_delete_internal(struct node __far *root, int key)
           temp = root->right_child;
       else
           temp = root->left_child;
-      free(root);
+      pmalloc_free(pm, root);      
       return temp;
     }
 
