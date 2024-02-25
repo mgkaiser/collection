@@ -2,7 +2,8 @@
     "files.associations": {
         "stddef.h": "c",
         "stdint.h": "c",
-        "pmalloc.h": "c"
+        "pmalloc.h": "c",
+        "collection_test.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

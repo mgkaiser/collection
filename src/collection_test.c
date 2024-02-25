@@ -1,14 +1,20 @@
 #include <stdio.h>
+#include "collection_test.h"
+#include "btree_test.h"
 #include "pmalloc.h"
 #include "linkedlist.h"
 #include "queue.h"
 #include "btree.h"
 
+// Pointer to heap header
+pmalloc_t __far *pm;
+
 int main() {
-	printf("collections: Basic Example\r\r");	
-	
+	printf("Collections: Basic Example\r\r");	
+
+	// Set the pointer to the heap header	
 	pmalloc_t pmblock;
-	pmalloc_t *pm = &pmblock;
+	pm = &pmblock;
 	
 	// Initialise our pmalloc
 	pmalloc_init(pm);
@@ -26,7 +32,8 @@ int main() {
 
 	// Queue tests
 
-	// BTree tests
+	// BTree tests	
+	btree_test();
 		
 	printf("Done\r");
 	return 0;

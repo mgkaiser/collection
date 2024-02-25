@@ -2,11 +2,11 @@
 ROOT			= collection
 PRG				= $(ROOT)_test.pgz
 LIB				= lib/$(ROOT).a
-LIB_H			= inc/linkedlist.h
+LIB_H			= inc/linkedlist.h inc/queue.h inc/btree.h
 
 # Sources
 ASM_SRCS 		=
-C_SRCS 			= $(ROOT)_test.c
+C_SRCS 			= $(ROOT)_test.c btree_test.c
 LIB_ASM_SRCS 	=
 LIB_C_SRCS 		= linkedlist.c queue.c btree.c
 
@@ -38,8 +38,8 @@ obj/%.o: %.s
 	as65816 --core=65816 $(MODEL) $(DEBUG)--target=Foenix --list-file=$(@:%.o=%.lst) -o $@ $<
 
 obj/%.o: %.c
-	cc65816 --core=65816 $(MODEL) $(DEBUG) --target=Foenix -O2 --speed --list-file=$(@:%.o=%.lst) -Iinc -I$(LIB_INC) -I$(INC) -o $@ $<
-	#cc65816 --core=65816 $(MODEL) $(DEBUG) --target=Foenix -O2 --speed --list-file=$(@:%.o=%.lst) -Iinc -I$(LIB_INC) -I$(INC)  --assembly-source $(@:%.o=%.s) -o $@ $<
+	cc65816 --core=65816 $(MODEL) $(DEBUG) --target=Foenix -O2 --speed --list-file=$(@:%.o=%.lst) -I./inc -I$(LIB_INC) -I$(INC) -o $@ $<
+	#cc65816 --core=65816 $(MODEL) $(DEBUG) --target=Foenix -O2 --speed --list-file=$(@:%.o=%.lst) -I./inc -I$(LIB_INC) -I$(INC) --assembly-source $(@:%.o=%.s) -o $@ $<
 
 $(LIB): $(LIB_OBJS)	
 	nlib $(LIB) $(LIB_OBJS)	
@@ -53,8 +53,8 @@ clean:
 	-rm $(PRG:%.pgz=%.lst) $(OBJS:%.o=%.lst) $(OBJS) $(PRG)
 	-rm $(LIB:%.pgz=%.lst) $(LIB_OBJS:%.o=%.lst) $(LIB_OBJS) $(LIB)
 	-rm $(DEST)$(PRG)
-	-rm $(LIB_DEST)$(LIB)
-	-rm $(LIB_DEST)$(LIB_H)
+	-rm $(foreach L,$(LIB),$(LIB_DEST)$(L))	
+	-rm $(foreach L,$(LIB_H),$(LIB_DEST)$(L))	
 
 install_lib: $(LIB)	
 	-cp $(LIB) $(LIB_DEST)lib/
