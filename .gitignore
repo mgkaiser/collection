@@ -1,0 +1,6 @@
+build
+*.lst
+*.pgz
+obj/*.lst
+obj/*.o
+lib/*.a
