@@ -6,7 +6,7 @@ LIB_H			= inc/linkedlist.h inc/queue.h inc/btree.h
 
 # Sources
 ASM_SRCS 		=
-C_SRCS 			= $(ROOT)_test.c btree_test.c
+C_SRCS 			= $(ROOT)_test.c btree_test.c queue_test.c
 LIB_ASM_SRCS 	=
 LIB_C_SRCS 		= linkedlist.c queue.c btree.c
 
