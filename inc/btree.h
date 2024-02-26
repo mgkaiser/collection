@@ -13,5 +13,6 @@ struct node __far *btree_insert(struct node __far **root, long key, void __far *
 void btree_delete(struct node __far **root, long key);
 void btree_iterate_forward(struct node __far *root, void (*iterator)(void __far *node, void __far *param), void __far *param);
 void btree_iterate_backward(struct node __far *root, void (*iterator)(void __far *node, void __far *param), void __far *param);
+unsigned long btree_orderedHash(char *s, const char *charset, long n);
 
 #endif

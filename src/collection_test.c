@@ -4,41 +4,7 @@
 #include "queue_test.h"
 #include "linkedlist.h"
 #include "pmalloc.h"
-
-#define SETIN ( (void (*)(char) ) 0x1038) 
-#define GETCH ( (char (*)(void) ) 0x1048) 
-
-size_t _Stub_read (int fd, void *buf, size_t count) {  
-
- 	char n = 0;	
-	size_t c = 0;
-
-	// If we're tying to read from the keyboard
-	if (fd == 0) {		
-
-		// Select the keyboard
-		SETIN(0);
-
-		// Get a character	
-		do {
-			n = GETCH();		
-		} while (n == 0);
-
-		// Did we get it
-		if (n != 0) {
-
-			// Add it to the bufffer
-			*((char *)buf) = n;
-
-			// Bump up the count
-			c++;
-
-		}
-		
-	}
-  
-  return c;	
-}
+#include "stub_read.h"
 
 int main() {
 	char ch;
@@ -50,16 +16,10 @@ int main() {
 	pm = &pmblock;
 	
 	// Initialise our pmalloc
-	pmalloc_init(pm);
-	#ifdef DEBUG
-	pmalloc_dump_stats(pm);
-	#endif
+	pmalloc_init(pm);	
 	
 	// Add memory to the heap
-	pmalloc_addblock(pm, (void __far *)0x300000, 0x100000);	
-	#ifdef DEBUG
-	pmalloc_dump_stats(pm);
-	#endif	
+	pmalloc_addblock(pm, (void __far *)0x300000, 0x100000);			
 
 	// Linked List tests
 

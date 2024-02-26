@@ -77,6 +77,16 @@ void btree_test()
   printf("---------------------\r");
   printf("\r");
 
+  printf("Press ENTER key to Continue\r");  
+	getchar();  
+
+  printf("Ordered Hash\r");	
+
+  const char *charset = "abcdefghijklmnopqrstuvwxyz";
+
+  printf ("apple:  %lu\r", btree_orderedHash("apple", charset, 9));
+  printf ("banana: %lu\r", btree_orderedHash("banana", charset, 9));
+
 }
 
 void printNode(void __far *node, void __far *param)

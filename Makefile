@@ -2,7 +2,7 @@
 ROOT			= collection
 PRG				= $(ROOT)_test.pgz
 LIB				= lib/$(ROOT).a
-LIB_H			= inc/linkedlist.h inc/queue.h inc/btree.h
+LIB_H			= inc/linkedlist.h inc/queue.h inc/btree.h inc/stub_read.h
 
 # Sources
 ASM_SRCS 		=

@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdio.h>
+#include <string.h>
+#include <math.h>
 
 // Make BTree multi index
 // tree root contains an array of roots
@@ -133,26 +135,27 @@ void btree_iterate_backward(struct node __far *root, void (*iterator)(void __far
   }
 }
 
-/*
-https://stackoverflow.com/questions/2003051/creating-a-hash-of-a-string-thats-sortable
+unsigned long btree_orderedHash(char *s, const char *charset, long n) {
 
-String charset = "abcdefghijklmnopqrstuvwxyz";
+  unsigned long hash = 0;
+  size_t slen = strlen(s);
 
-public long orderedHash(final String s, final String charset, final long n) {
-  Long hash = 0L;
 
-  if(s.isEmpty() || n == 0)
-    return hash;
+  // If the string is empty or the length is 0, return 0
+  if (slen ==0 || n == 0) return hash;
 
-  Long charIndex = (long)(charset.indexOf(s.charAt(0)));
-  if(charIndex == -1)
-    return hash;
+  // Find the position of the first character of "s" in "charset", return 0 if not ound
+  unsigned long charIndex = (unsigned long)(charset - strchr(charset, s[0]));
+  if (charIndex == (unsigned long)charset) return hash;
 
-  for(long i = 1 ; i < n; i++)
-    hash += (long)(charIndex * Math.pow(charset.length(), i));
+  for (unsigned long i = 1; i < n; i++) {
+    hash += (unsigned long)(charIndex * pow(slen,i));    
+  }
 
-  hash += charIndex + 1 + orderedHash(s.substring(1), charset, n - 1);
+  // Calculate next digit of the hash
+  hash += charIndex + 1 + btree_orderedHash(&s[1], charset, n - 1);
 
   return hash;
+
 }
-*/
+
