@@ -9,6 +9,12 @@
     unsigned int testData;
   };
 
+  struct btreeTestData2 
+  {
+    struct node header;
+    char testData[16];
+  };
+
   void btree_test();
   void printNode(void __far *node, __far void* param);
   struct btreeTestData __far *newNode(unsigned long testData);

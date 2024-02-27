@@ -68,7 +68,7 @@ void btree_test()
 
   printf("Delete last item\r");	
   btree_delete(&root, 25);  
-  btree_iterate_forward(root, &printNode, testString2);
+  btree_iterate_forward(root, &printNode, testString1);
   printf("\r");
 
   printf("---------------------\r");
@@ -79,14 +79,6 @@ void btree_test()
 
   printf("Press ENTER key to Continue\r");  
 	getchar();  
-
-  printf("Ordered Hash\r");	
-
-  const char *charset = "abcdefghijklmnopqrstuvwxyz";
-
-  printf ("apple:  %lu\r", btree_orderedHash("apple", charset, 9));
-  printf ("banana: %lu\r", btree_orderedHash("banana", charset, 9));
-
 }
 
 void printNode(void __far *node, void __far *param)

@@ -45,7 +45,9 @@ void queue_test()
   } while (queueItem != NULL);  
   pmalloc_dump_stats(pm);
   printf("\r");
-    
+
+  printf("Press ENTER key to Continue\r");  
+	getchar();     
 }
 
 struct queueTestData __far *newQueueItem(unsigned int testData)

@@ -6,13 +6,33 @@
 #include "pmalloc.h"
 #include "stub_read.h"
 
+pmalloc_t pmblock;
+
+void initHeap();
+
 int main() {
 	char ch;
 
 	printf("Collections: Basic Example\r\r");	
 
-	// Set the pointer to the heap header	
-	pmalloc_t pmblock;
+	// Init Heap
+	initHeap();
+	
+	// Linked List tests
+
+	// Queue tests	
+	queue_test();
+
+	// BTree tests		 
+	btree_test();	
+			
+	printf("Done\r");
+	return 0;
+}
+
+void initHeap() {
+
+	// Set the pointer to the heap header		
 	pm = &pmblock;
 	
 	// Initialise our pmalloc
@@ -20,21 +40,4 @@ int main() {
 	
 	// Add memory to the heap
 	pmalloc_addblock(pm, (void __far *)0x300000, 0x100000);			
-
-	// Linked List tests
-
-	// Queue tests
-	printf("Press ENTER key to Continue\r");  
-	getchar();  
-	queue_test();
-
-	// BTree tests	
-	printf("Press ENTER key to Continue\r");  
-	getchar();  
-	btree_test();
-		
-	printf("Press ENTER key to Continue\r");  
-	getchar();  
-	printf("Done\r");
-	return 0;
 }
